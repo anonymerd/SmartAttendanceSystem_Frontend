@@ -21,9 +21,7 @@ const Admin = () => {
           </div>
         </div>
         <div className='camera-btn-container'>
-          <button className='open-camera-btn' onClick={launchCamera}>
-            dabao aur camera kholo bc
-          </button>
+          <button className='open-camera-btn'>dabao aur camera kholo bc</button>
         </div>
       </section>
       <section className='middle-section'>
@@ -97,8 +95,8 @@ const Admin = () => {
         </div>
       </section>
       <div className='camera-container'>
-        <video className='camera-element' ref={cameraElement}></video>
-        <div className='camera-canvas' ref={canvasElement}></div>
+        <video className='camera-element'></video>
+        <div className='camera-canvas'></div>
       </div>
     </div>
   );
