@@ -49,7 +49,7 @@ const Camera = () => {
           };
           FaceApi.matchDimensions(canvas, displaySize);
 
-          setInterval(async () => {
+          const interval = setInterval(async () => {
             const detections = await FaceApi.detectAllFaces(
               video,
               new FaceApi.TinyFaceDetectorOptions()
@@ -64,6 +64,7 @@ const Camera = () => {
             FaceApi.draw.drawDetections(canvas, resizedDetections);
 
             if (detections.length > 0) {
+              clearInterval(interval);
               takePhoto();
             }
           }, 100);
@@ -81,6 +82,21 @@ const Camera = () => {
 
           let ctx = photo.getContext('2d');
           ctx.drawImage(video, 0, 0, width, height);
+
+          savePhoto(photo);
+        };
+
+        const savePhoto = (ctx) => {
+          let downloadLink = document.createElement('a');
+          downloadLink.setAttribute('download', 'CanvasAsImage.png');
+          // let canvas = document.getElementById('myCanvas');
+          let dataURL = ctx.toDataURL('image/png');
+          let url = dataURL.replace(
+            /^data:image\/png/,
+            'data:application/octet-stream'
+          );
+          downloadLink.setAttribute('href', url);
+          downloadLink.click();
         };
       };
     });

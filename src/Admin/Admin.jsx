@@ -1,6 +1,6 @@
 import React from 'react';
 import './Admin.css';
-import amazonLogo from '../assets/images/amazon.jpeg';
+import amazonLogo from '../assets/images/amazon-logo.png';
 
 const Admin = () => {
   return (
