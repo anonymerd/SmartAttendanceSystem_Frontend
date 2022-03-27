@@ -1,0 +1,12 @@
+.super-admin-page-container .client-info-container .client-info {
+  border: 2px solid forestgreen;
+}
+
+.super-admin-page-container .client-info-container .client-info th {
+  border-bottom: 1px solid black;
+}
+
+.super-admin-page-container .client-info-container .client-info td {
+  text-align: center;
+  padding: 5px;
+}
