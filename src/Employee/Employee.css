@@ -1,0 +1,25 @@
+.employee-page-container .employee-details-container {
+  display: flex;
+  padding: 25px;
+}
+
+.employee-page-container
+  .employee-details-container
+  .employee-image-container
+  img {
+  width: 100px;
+  height: 100px;
+}
+
+.employee-page-container .employee-logs-container .attendance-logs {
+  border: 2px solid forestgreen;
+}
+
+.employee-page-container .employee-logs-container .attendance-logs th {
+  border-bottom: 1px solid black;
+}
+
+.employee-page-container .employee-logs-container .attendance-logs td {
+  text-align: center;
+  padding: 5px;
+}
