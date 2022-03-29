@@ -1,5 +1,6 @@
 import React from 'react';
 import './SuperAdmin.css';
+
 const SuperAdmin = () => {
   return (
     <div className='super-admin-page-container'>
