@@ -94,10 +94,6 @@ const Admin = () => {
           <button>Search</button>
         </div>
       </section>
-      <div className='camera-container'>
-        <video className='camera-element'></video>
-        <div className='camera-canvas'></div>
-      </div>
     </div>
   );
 };

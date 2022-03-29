@@ -1,12 +1,20 @@
 import './App.css';
-// import Admin from './Admin/Admin';
-// import LiveML from './Admin/LiveML';
-// import SuperAdmin from './SuperAdmin/SuperAdmin'
-// import Employee from './Employee/Employee';
+import Admin from './Admin/Admin';
 import Camera from './Admin/Camera/Camera';
+import Home from './Home/Home';
+
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
-  return <Camera />;
+  return (
+    <div>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='admin' element={<Admin />}></Route>
+        <Route path='capture-attendance' element={<Camera />}></Route>
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
