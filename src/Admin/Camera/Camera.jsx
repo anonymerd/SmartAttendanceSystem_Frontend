@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as FaceApi from 'face-api.js';
 import WebCam from 'react-webcam';
 import './Camera.css';
+import Popup from './Popup/Popup';
 
 const Camera = () => {
   const [video, setVideo] = useState(null);
+  const [open, setOpen] = useState(false);
   const height = 650;
   const width = 800;
   const videoRef = useRef(null);
@@ -102,6 +104,20 @@ const Camera = () => {
     });
   }, [video]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const employee = {
+    name: 'Rohit Bisht',
+    empId: 'EMPH2856',
+    image:
+      'https://www.seekpng.com/png/detail/895-8958633_okhand22-dank-memes-meme-mouth.png',
+  };
+
   return (
     <div className='camera-container'>
       <div className='camera-capture-container' ref={containerRef}>
@@ -115,6 +131,12 @@ const Camera = () => {
           muted
         />
         <canvas ref={photoRef}></canvas>
+        <Popup
+          employee={employee}
+          openDialog={open}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+        />
         {/* <button onClick={takePhoto}>Capture</button> */}
       </div>
     </div>
