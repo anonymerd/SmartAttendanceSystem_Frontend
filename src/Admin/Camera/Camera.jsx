@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as FaceApi from 'face-api.js';
 import WebCam from 'react-webcam';
+import axios from 'axios';
 import './Camera.css';
+
+// axios.defaults.xsrfCookieName = 'csrftoken';
+// axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 const Camera = () => {
   const [video, setVideo] = useState(null);
@@ -52,7 +56,7 @@ const Camera = () => {
           const interval = setInterval(async () => {
             const detections = await FaceApi.detectAllFaces(
               video,
-              new FaceApi.TinyFaceDetectorOptions()
+              new FaceApi.TinyFaceDetectorOptions({ scoreThreshold: 0.8 })
             );
             const resizedDetections = FaceApi.resizeResults(
               detections,
@@ -64,6 +68,7 @@ const Camera = () => {
             FaceApi.draw.drawDetections(canvas, resizedDetections);
 
             if (detections.length > 0) {
+              video.pause();
               clearInterval(interval);
               takePhoto();
             }
@@ -75,15 +80,39 @@ const Camera = () => {
           const height = width / (16 / 9);
 
           // let video = videoRef.current;
-          let photo = photoRef.current;
+          // let photo = photoRef.current;
+          let photo = document.createElement('canvas');
 
           photo.width = width;
           photo.height = height;
 
           let ctx = photo.getContext('2d');
           ctx.drawImage(video, 0, 0, width, height);
+          // savePhoto(photo);
+          sendPhotoToServer(photo);
+        };
 
-          savePhoto(photo);
+        const sendPhotoToServer = (photo) => {
+          const formData = new FormData();
+          formData.append('empId', '351351321');
+          formData.append('name', 'amkhil');
+          formData.append('image', photo.toDataURL('image/png'));
+
+          const apiAddress = 'http://127.0.0.1:8000/api/image/';
+          // const apiAddress = 'http://127.0.0.1:8000/api/employee/';
+
+          axios
+            .post(apiAddress, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         };
 
         const savePhoto = (ctx) => {
@@ -114,7 +143,7 @@ const Camera = () => {
           playsInline
           muted
         />
-        <canvas ref={photoRef}></canvas>
+        {/* <canvas ref={photoRef}></canvas> */}
         {/* <button onClick={takePhoto}>Capture</button> */}
       </div>
     </div>
