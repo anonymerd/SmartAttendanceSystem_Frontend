@@ -8,9 +8,17 @@ import Popup from './Popup/Popup';
 // axios.defaults.xsrfCookieName = 'csrftoken';
 // axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
+const defaultEmployee = {
+  name: 'Rohit Bisht',
+  empId: 'EMPH2856',
+  image:
+    'https://www.seekpng.com/png/detail/895-8958633_okhand22-dank-memes-meme-mouth.png',
+};
+
 const Camera = () => {
   const [video, setVideo] = useState(null);
   const [open, setOpen] = useState(false);
+  const [employee, setEmployee] = useState(defaultEmployee);
   const height = 650;
   const width = 800;
   const videoRef = useRef(null);
@@ -58,7 +66,7 @@ const Camera = () => {
           const interval = setInterval(async () => {
             const detections = await FaceApi.detectAllFaces(
               video,
-              new FaceApi.TinyFaceDetectorOptions({ scoreThreshold: 0.8 })
+              new FaceApi.TinyFaceDetectorOptions({ scoreThreshold: 0.85 })
             );
             const resizedDetections = FaceApi.resizeResults(
               detections,
@@ -70,7 +78,7 @@ const Camera = () => {
             FaceApi.draw.drawDetections(canvas, resizedDetections);
 
             if (detections.length > 0) {
-              video.pause();
+              // video.pause();
               clearInterval(interval);
               takePhoto();
             }
@@ -96,8 +104,8 @@ const Camera = () => {
 
         const sendPhotoToServer = (photo) => {
           const formData = new FormData();
-          formData.append('empId', '351351321');
-          formData.append('name', 'amkhil');
+          formData.append('empId', '4545');
+          formData.append('name', 'Keshav');
           formData.append('image', photo.toDataURL('image/png'));
 
           const apiAddress = 'http://127.0.0.1:8000/api/image/';
@@ -111,6 +119,8 @@ const Camera = () => {
             })
             .then((res) => {
               console.log(res);
+              setEmployee(res.data);
+              setOpen(true);
             })
             .catch((err) => {
               console.error(err);
@@ -138,13 +148,6 @@ const Camera = () => {
   };
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const employee = {
-    name: 'Rohit Bisht',
-    empId: 'EMPH2856',
-    image:
-      'https://www.seekpng.com/png/detail/895-8958633_okhand22-dank-memes-meme-mouth.png',
   };
 
   return (
