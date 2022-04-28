@@ -1,12 +1,27 @@
-.super-admin-page-container .client-info-container .client-info {
-  border: 2px solid forestgreen;
+.super-admin-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.super-admin-page-container .client-info-container .client-info th {
-  border-bottom: 1px solid black;
+.super-admin-page-container .navbar-container {
+  width: 100%;
 }
 
-.super-admin-page-container .client-info-container .client-info td {
-  text-align: center;
-  padding: 5px;
+.super-admin-page-container .top-section,
+.super-admin-page-container .bottom-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  padding: 50px;
+}
+
+.super-admin-page-container .top-section .new-request-container {
+  width: 70%;
+}
+
+.super-admin-page-container .bottom-section .client-info-container {
+  width: 80%;
 }

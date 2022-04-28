@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,24 +34,8 @@ const NavBar = ({ title }) => {
             color='inherit'
             align='center'
           >
-            Company Admin Dashboard
+            Super Admin Dashboard
           </Typography>
-
-          <div className={classes.optionsDiv}>
-            {/* <Button variant='contained' size='small' style={{ margin: '5px' }}>
-              Employee Directory
-            </Button> */}
-            <Button
-              variant='contained'
-              size='small'
-              style={{ margin: '5px' }}
-              component={Link}
-              to='/capture-attendance'
-              target='_blank'
-            >
-              Launch Camera
-            </Button>
-          </div>
         </Toolbar>
       </AppBar>
     </div>

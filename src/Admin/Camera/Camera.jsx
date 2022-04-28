@@ -5,9 +5,6 @@ import axios from 'axios';
 import './Camera.css';
 import Popup from './Popup/Popup';
 
-// axios.defaults.xsrfCookieName = 'csrftoken';
-// axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
 const defaultEmployee = {
   name: 'Rohit Bisht',
   empId: 'EMPH2856',
@@ -66,7 +63,7 @@ const Camera = () => {
           const interval = setInterval(async () => {
             const detections = await FaceApi.detectAllFaces(
               video,
-              new FaceApi.TinyFaceDetectorOptions({ scoreThreshold: 0.85 })
+              new FaceApi.TinyFaceDetectorOptions({ scoreThreshold: 0.8 })
             );
             const resizedDetections = FaceApi.resizeResults(
               detections,
@@ -104,8 +101,8 @@ const Camera = () => {
 
         const sendPhotoToServer = (photo) => {
           const formData = new FormData();
-          formData.append('empId', '4545');
-          formData.append('name', 'Keshav');
+          formData.append('empId', Math.floor(Math.random() * 1000) + 1);
+          formData.append('name', 'random');
           formData.append('image', photo.toDataURL('image/png'));
 
           const apiAddress = 'http://127.0.0.1:8000/api/image/';

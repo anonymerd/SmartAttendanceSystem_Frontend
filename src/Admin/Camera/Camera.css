@@ -14,15 +14,6 @@
   justify-content: center;
   align-items: center;
 }
-
-/* .camera-container .camera-capture-container #cameraElement {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 350px;
-  left: 450px;
-} */
-
 .camera-container .camera-capture-container #canvas {
   position: absolute;
   top: 50%;

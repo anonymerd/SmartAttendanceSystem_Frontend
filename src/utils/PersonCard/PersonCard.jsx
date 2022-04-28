@@ -48,15 +48,15 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-const data = {
-  name: 'Google',
-  location: 'Banlgalore, India',
-  logo: 'https://banner2.cleanpng.com/20180728/tju/kisspng-google-logo-business-microsoft-windows-operating-system-5b5cb99e99ca38.3321008115328034866299.jpg',
-  adminName: 'Adams Ken',
-  noOfEmployees: '69k',
-};
+// const data = {
+//   name: 'Google',
+//   location: 'Banlgalore, India',
+//   logo: 'https://banner2.cleanpng.com/20180728/tju/kisspng-google-logo-business-microsoft-windows-operating-system-5b5cb99e99ca38.3321008115328034866299.jpg',
+//   adminName: 'Adams Ken',
+//   noOfEmployees: '69k',
+// };
 
-export const CompanyDetails = () => {
+export const CompanyDetails = ({ data }) => {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
@@ -66,19 +66,19 @@ export const CompanyDetails = () => {
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
-        <Avatar className={styles.avatar} src={data.logo} />
+        <Avatar className={styles.avatar} src={data.picture} />
         <h3 className={styles.heading}>{data.name}</h3>
         <span className={styles.subheader}>{data.location}</span>
       </CardContent>
       <Divider light />
       <Box display={'flex'}>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-          <p className={styles.statLabel}>Admin Name</p>
-          <p className={styles.statValue}>{data.adminName}</p>
+          <p className={styles.statLabel}>Department</p>
+          <p className={styles.statValue}>{data.department}</p>
         </Box>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-          <p className={styles.statLabel}>No. of Employees</p>
-          <p className={styles.statValue}>{data.noOfEmployees}</p>
+          <p className={styles.statLabel}>Designation</p>
+          <p className={styles.statValue}>{data.designation}</p>
         </Box>
       </Box>
     </Card>
