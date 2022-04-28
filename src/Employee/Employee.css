@@ -1,25 +1,27 @@
-.employee-page-container .employee-details-container {
+.employee-page-container {
   display: flex;
-  padding: 25px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.employee-page-container
-  .employee-details-container
-  .employee-image-container
-  img {
-  width: 100px;
-  height: 100px;
+.employee-page-container .navbar-container {
+  width: 100%;
 }
 
-.employee-page-container .employee-logs-container .attendance-logs {
-  border: 2px solid forestgreen;
+.employee-page-container .top-section,
+.employee-page-container .bottom-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  padding: 50px;
 }
 
-.employee-page-container .employee-logs-container .attendance-logs th {
-  border-bottom: 1px solid black;
+.employee-page-container .top-section .new-request-container {
+  width: 70%;
 }
 
-.employee-page-container .employee-logs-container .attendance-logs td {
-  text-align: center;
-  padding: 5px;
+.employee-page-container .bottom-section .client-info-container {
+  width: 80%;
 }

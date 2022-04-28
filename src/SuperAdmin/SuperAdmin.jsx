@@ -200,7 +200,7 @@ const SuperAdmin = () => {
         <Navbar />
       </div>
       <section className='top-section'>
-        <div className='super-admin-info-container'>
+        <div>
           <PersonCard data={employee} />
         </div>
         <div className='new-request-container'>

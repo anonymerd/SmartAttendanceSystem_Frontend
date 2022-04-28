@@ -4,6 +4,7 @@ import Camera from './Admin/Camera/Camera';
 import Home from './Home/Home';
 import { Routes, Route } from 'react-router-dom';
 import SuperAdmin from './SuperAdmin/SuperAdmin';
+import Employee from './Employee/Employee';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='admin' element={<Admin />}></Route>
-        <Route path='superadmin' element={<SuperAdmin />}></Route>
+        <Route path='super-admin' element={<SuperAdmin />}></Route>
+        <Route path='employee' element={<Employee />}></Route>
         <Route path='capture-attendance' element={<Camera />}></Route>
       </Routes>
     </div>
