@@ -9,8 +9,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
 
-import PopupCamera from '../PopupCamera/PopupCamera';
-
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const inputPicRef = React.useRef(null);

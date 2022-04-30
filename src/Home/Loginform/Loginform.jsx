@@ -3,6 +3,7 @@ import '../Home.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
+import Registerform from "../Registerform/Registerform";
 
 
 export default function LoginForm() {
@@ -29,9 +30,9 @@ export default function LoginForm() {
             fullWidth
             variant='standard'
           />
-        <DialogActions>
-          <Button type='submit' variant='contained' size='large'>Login</Button>
-          <Button>Register</Button>
+        <DialogActions> 
+          <Button type='submit' variant='contained' size='large' style= {{margin: '0 20px'}}>Login</Button>
+          <Registerform />
         </DialogActions>
       </form>
     </div>
