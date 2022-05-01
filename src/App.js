@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='admin' element={<Admin />}></Route>
-        <Route path='super-admin' element={<SuperAdmin />}></Route>
+        <Route path='superadmin' element={<SuperAdmin />}></Route>
         <Route path='employee' element={<Employee />}></Route>
         <Route path='capture-attendance' element={<Camera />}></Route>
       </Routes>
