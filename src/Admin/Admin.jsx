@@ -7,9 +7,9 @@ import SearchInput from './SearchInput/SearchInput';
 import AddEmployee from './AddEmployee/AddEmployee';
 import RemoveEmployee from './RemoveEmployee/RemoveEmployee';
 import Popup from './Camera/Popup/Popup';
-
 import './Admin.css';
 import axios from 'axios';
+import env from 'react-dotenv';
 
 const data = [
   {
@@ -64,8 +64,9 @@ const data = [
 
 const headers = ['EmpId', 'Name', 'CheckIn', 'CheckOut'];
 
-const apiAddress = 'http://127.0.0.1:8000/api/employee/';
-
+// const apiAddress = 'http://127.0.0.1:8000/api/employee/';
+const apiAddress = env.SERVER_ADDRESS + '/employee';
+// console.log(env.SERVER_ADDRESS)
 const defaultEmployee = {
   name: 'Rohit Bisht',
   empId: 'EMPH2856',

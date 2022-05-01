@@ -29,7 +29,7 @@ export default function Registerform() {
       console.log(key, value);
     }
 
-    const apiAddress = 'http://127.0.0.1:8000/api/employee/';
+    const apiAddress = process.env.SERVER_ADDRESS;
 
     axios
       .post(apiAddress, formData, {
