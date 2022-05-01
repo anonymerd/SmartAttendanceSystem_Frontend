@@ -59,36 +59,18 @@ export default function Registerform() {
             <TextField
               autoFocus
               margin='dense'
-              id='name'
-              name='name'
-              label='Name'
+              id='comp-name'
+              name='comp-name'
+              label='Company Name'
               type='text'
               fullWidth
               variant='standard'
             />
             <TextField
               margin='dense'
-              id='email'
-              name='email'
-              label='Email'
-              type='email'
-              fullWidth
-              variant='standard'
-            />
-            <TextField
-              margin='dense'
-              id='admin-name'
-              name='admin-name'
-              label='Admin Name'
-              type='text'
-              fullWidth
-              variant='standard'
-            />
-            <TextField
-              margin='dense'
-              id='admin-email'
-              name='admin-email'
-              label='Admin Email'
+              id='comp-email'
+              name='comp-email'
+              label='Company Email'
               type='email'
               fullWidth
               variant='standard'
@@ -124,6 +106,53 @@ export default function Registerform() {
               <span>Company Logo: </span>
               <input type='file' name='image' ref={inputPicRef} />
             </div>
+
+          </DialogContent>
+         
+          <DialogContent>
+          <DialogContentText>Add Admin Details Here!</DialogContentText>
+            <TextField
+                margin='dense'
+                id='admin-name'
+                name='admin-name'
+                label='Admin Name'
+                type='text'
+                fullWidth
+                variant='standard'
+              />
+              <TextField
+                margin='dense'
+                id='admin-email'
+                name='admin-email'
+                label='Admin Email'
+                type='email'
+                fullWidth
+                variant='standard'
+              />
+
+              <TextField
+                margin='dense'
+                id='admin-id'
+                name='admin-id'
+                label='Admin Id'
+                type='text'
+                fullWidth
+                variant='standard'
+              />
+
+              <TextField
+                margin='dense'
+                id='admin-designation'
+                name='admin-designation'
+                label='Admin Designation'
+                type='text'
+                fullWidth
+                variant='standard'
+              />
+              <div style={{margin: '2% 0'}}>
+                <span>Admin Image: </span>
+                <input type='file' name='image' ref={inputPicRef} />
+              </div>
           </DialogContent>
           <DialogActions>
             <Button type='submit'>Register</Button>
