@@ -66,20 +66,14 @@ export const CompanyDetails = ({ data }) => {
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <CardContent>
-        <Avatar className={styles.avatar} src={data.picture} />
+        <Avatar className={styles.avatar} src={data.image} />
         <h3 className={styles.heading}>{data.name}</h3>
-        <span className={styles.subheader}>{data.location}</span>
+        <span className={styles.subheader}>{data.email}</span>
       </CardContent>
       <Divider light />
-      <Box display={'flex'}>
-        <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-          <p className={styles.statLabel}>Department</p>
-          <p className={styles.statValue}>{data.department}</p>
-        </Box>
-        <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+      <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>Designation</p>
           <p className={styles.statValue}>{data.designation}</p>
-        </Box>
       </Box>
     </Card>
   );
