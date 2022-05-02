@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '@mui/material';
 import './Employee.css';
 import NavBar from './Navbar/Navbar';
 import PersonCard from '../utils/PersonCard/PersonCard';
@@ -253,11 +252,11 @@ const Employee = () => {
         <NavBar />
         <section className='top-section'>
           <div>
-            <PersonCard data={employee}/>
+            <PersonCard data={employee} />
           </div>
-        <div className='new-request-container'>
-        <Table headers={headers} rows={data} />
-        </div>
+          <div className='new-request-container'>
+            <Table headers={headers} rows={data} />
+          </div>
         </section>
       </div>
     </div>

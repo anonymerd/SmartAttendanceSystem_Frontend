@@ -10,6 +10,7 @@ import Popup from './Camera/Popup/Popup';
 import './Admin.css';
 import axios from 'axios';
 import env from 'react-dotenv';
+import { useLocation } from 'react-router-dom';
 
 const data = [
   {
@@ -68,27 +69,61 @@ const headers = ['EmpId', 'Name', 'CheckIn', 'CheckOut'];
 const apiAddress = env.SERVER_ADDRESS + '/employee';
 // console.log(env.SERVER_ADDRESS)
 const defaultEmployee = {
-  name: 'Rohit Bisht',
-  empId: 'EMPH2856',
+  name: '',
+  empId: '',
   image:
-    'https://www.seekpng.com/png/detail/895-8958633_okhand22-dank-memes-meme-mouth.png',
+    'https://www.google.com/url?sa=i&url=https%3A%2F%2Fenphamedbiotech.com%2Four-team%2F&psig=AOvVaw13HFLxYZx5i_MtjHwGV76L&ust=1651534943276000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPC9m5-9v_cCFQAAAAAdAAAAABAD',
+};
+
+const defaultCompany = {
+  name: '',
+  location: '',
+  adminName: '',
+  noOfEmployees: '',
 };
 
 const Admin = () => {
+  const { state } = useLocation();
   const [empIds, updateEmpIds] = useState([]);
   const [openEmpDetails, setOpenEmpDetails] = useState(false);
   const [employeeDetails, setEmployeeDetails] = useState(defaultEmployee);
+  const [companyDetails, setCompanyDetails] = useState(defaultCompany);
+
+  const getAdminData = () => {};
 
   useEffect(() => {
-    axios
-      .get(apiAddress)
-      .then((res) => {
-        updateEmpIds(res.data);
-        // console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    const getCompanyData = () => {
+      axios
+        .get(env.SERVER_ADDRESS + '/company/' + state.companyId)
+        .then((res) => {
+          console.log(res);
+          const data = res.data.data;
+          data.image = env.SERVER_ROOT_ADDRESS + data.image;
+          console.log(data.image);
+          setCompanyDetails({
+            name: data.name,
+            location: data.city + ', ' + data.country,
+            adminName: data.adminName,
+            noOfEmployees: data.noOfEmployees,
+            image: data.image,
+          });
+        });
+    };
+
+    const getUserIds = () => {
+      axios
+        .get(env.SERVER_ADDRESS + '/user/' + state.companyId)
+        .then((res) => {
+          updateEmpIds(res.data.data);
+          // console.log(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    };
+
+    getCompanyData();
+    getUserIds();
   }, []);
 
   const handleClickOpen = () => {
@@ -126,7 +161,7 @@ const Admin = () => {
             <Table headers={headers} rows={data} />
           </Grid>
           <Grid item xs={4}>
-            <CompanyDetails />
+            <CompanyDetails data={companyDetails} />
           </Grid>
         </Grid>
         <Grid

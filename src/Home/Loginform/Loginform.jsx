@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../Home.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
 import Registerform from '../Registerform/Registerform';
 
-export default function LoginForm() {
+export default function LoginForm({ login }) {
   return (
     <div className='App'>
-      <form className='form' onSubmit={'lund'}>
+      <form className='form' onSubmit={login}>
         <TextField
           autoFocus
           margin='dense'
@@ -18,16 +18,18 @@ export default function LoginForm() {
           type='email'
           fullWidth
           variant='standard'
+          required
         />
         <TextField
           autoFocus
           margin='dense'
           id='id'
-          name='empId'
+          name='password'
           label='Password'
-          type='text'
+          type='password'
           fullWidth
           variant='standard'
+          required
         />
         <DialogActions>
           <Button

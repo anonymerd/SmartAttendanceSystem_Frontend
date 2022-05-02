@@ -53,7 +53,8 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "SERVER_ADDRESS"
+      "SERVER_ADDRESS",
+      "SERVER_ROOT_ADDRESS"
     ]
   }
 }
