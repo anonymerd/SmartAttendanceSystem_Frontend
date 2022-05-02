@@ -51,6 +51,13 @@ const NavBar = ({ title }) => {
             >
               Launch Camera
             </Button>
+            <Button
+              variant='contained'
+              size='small'
+              style={{ margin: '5px' }}
+            >
+              Log Out
+            </Button>
           </div>
         </Toolbar>
       </AppBar>

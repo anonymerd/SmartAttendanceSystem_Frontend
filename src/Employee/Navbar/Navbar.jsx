@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { Link } from 'react-router-dom';
 
@@ -36,6 +36,13 @@ const NavBar = ({ title }) => {
           >
             Employee Dashboard
           </Typography>
+          <Button
+            variant='contained'
+            size='small'
+            style={{ margin: '5px' }}
+            >
+              Log Out
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
