@@ -71,9 +71,15 @@ export const CompanyDetails = ({ data }) => {
         <span className={styles.subheader}>{data.email}</span>
       </CardContent>
       <Divider light />
-      <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+      <Box display={'flex'}>
+        <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+          <p className={styles.statLabel}>Emp Id</p>
+          <p className={styles.statValue}>{data.empId}</p>
+        </Box>
+        <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>Designation</p>
           <p className={styles.statValue}>{data.designation}</p>
+        </Box>
       </Box>
     </Card>
   );
