@@ -264,7 +264,8 @@ const SuperAdmin = () => {
                 noOfEmployees: entry.noOfEmployees,
                 action: (
                   <div>
-                    <Button>Approve</Button> <Button>Deny</Button>
+                    <Button onClick={approveOrDenyCompany(entry.companyId, entry.email, true)}>Approve</Button> 
+                    <Button onClick={approveOrDenyCompany(entry.companyId, entry.email, false)}>Deny</Button>
                   </div>
                 ),
               };
@@ -281,6 +282,32 @@ const SuperAdmin = () => {
     getSuperAdminDetails();
     getCompanies();
   }, []);
+
+  /**
+   * Approve / Deny a company
+   */
+
+  const approveOrDenyCompany = (companyId, email, isApproved) => {
+
+    const data = {
+      companyId: companyId,
+      email: email,
+      approve: isApproved,
+    }
+
+    axios
+      .post(env.SERVER_ADDRESS + '/superuser/approve', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   
 
   return (
