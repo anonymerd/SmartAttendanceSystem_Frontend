@@ -21,7 +21,6 @@ export default function LoginForm({ login }) {
           required
         />
         <TextField
-          autoFocus
           margin='dense'
           id='id'
           name='password'

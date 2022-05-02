@@ -11,59 +11,60 @@ import './Admin.css';
 import axios from 'axios';
 import env from 'react-dotenv';
 import { useLocation } from 'react-router-dom';
+import { height } from '@mui/system';
 
-const data = [
-  {
-    EmpId: 1,
-    Name: 'Rohit Bisht',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-  {
-    EmpId: 2,
-    Name: 'Keshav',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-  {
-    EmpId: 3,
-    Name: 'Akhil',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-  {
-    EmpId: 4,
-    Name: 'Jane Doe',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-  {
-    EmpId: 1,
-    Name: 'Rohit Bisht',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-  {
-    EmpId: 2,
-    Name: 'Keshav',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-  {
-    EmpId: 3,
-    Name: 'Akhil',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-  {
-    EmpId: 4,
-    Name: 'Jane Doe',
-    CheckIn: '20-08-2365',
-    CheckOut: '36-89-1265',
-  },
-];
+// const data = [
+//   {
+//     EmpId: 1,
+//     Name: 'Rohit Bisht',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+//   {
+//     EmpId: 2,
+//     Name: 'Keshav',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+//   {
+//     EmpId: 3,
+//     Name: 'Akhil',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+//   {
+//     EmpId: 4,
+//     Name: 'Jane Doe',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+//   {
+//     EmpId: 1,
+//     Name: 'Rohit Bisht',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+//   {
+//     EmpId: 2,
+//     Name: 'Keshav',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+//   {
+//     EmpId: 3,
+//     Name: 'Akhil',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+//   {
+//     EmpId: 4,
+//     Name: 'Jane Doe',
+//     CheckIn: '20-08-2365',
+//     CheckOut: '36-89-1265',
+//   },
+// ];
 
-const headers = ['EmpId', 'Name', 'CheckIn', 'CheckOut'];
+const headers = ['EmpId', 'Name', 'Log Type', 'Timestamp', 'Location'];
 
 // const apiAddress = 'http://127.0.0.1:8000/api/employee/';
 const apiAddress = env.SERVER_ADDRESS + '/employee';
@@ -83,15 +84,21 @@ const defaultCompany = {
 };
 
 const Admin = () => {
+  
   const { state } = useLocation();
   const [empIds, updateEmpIds] = useState([]);
   const [openEmpDetails, setOpenEmpDetails] = useState(false);
   const [employeeDetails, setEmployeeDetails] = useState(defaultEmployee);
   const [companyDetails, setCompanyDetails] = useState(defaultCompany);
+  const [attendanceLogs, setAttendanceLogs] = useState([]);
 
   const getAdminData = () => {};
 
   useEffect(() => {
+
+    /**
+     * Get Company Details
+     */
     const getCompanyData = () => {
       axios
         .get(env.SERVER_ADDRESS + '/company/' + state.companyId)
@@ -110,6 +117,9 @@ const Admin = () => {
         });
     };
 
+    /**
+     * Get Users of a Company
+     */
     const getUserIds = () => {
       axios
         .get(env.SERVER_ADDRESS + '/user/' + state.companyId)
@@ -122,8 +132,38 @@ const Admin = () => {
         });
     };
 
+    /**
+     * Get Attendance Logs for the Company
+     */
+    const getAttendanceLogs = () => {
+      
+      axios
+        .get(env.SERVER_ADDRESS + '/log/' + state.companyId)
+        .then((res) => {
+          console.log(res);
+          const data = res.data.data;
+          
+          let attendanceLogsArray = [];
+
+          data.forEach((entry, index) => {
+            const attendanceLog = {
+              empId: entry.userId,
+              Name: entry.userName,
+              type: entry.type,
+              timestamp: entry.timestamp,
+              location: entry.location,
+            };
+
+            attendanceLogsArray.push(attendanceLog);
+          });
+
+          setAttendanceLogs(attendanceLogsArray);
+        });
+    };
+
     getCompanyData();
     getUserIds();
+    getAttendanceLogs();
   }, []);
 
   const handleClickOpen = () => {
@@ -150,44 +190,48 @@ const Admin = () => {
   return (
     <div className='admin-page-container'>
       <NavBar />
-      <Box sx={{ bgcolor: '#f0f0f0', padding: '20px' }}>
-        <Grid
-          container
-          spacing={2}
-          alignItems='center'
-          justifyContent='space-evenly'
-        >
-          <Grid item xs={8}>
-            <Table headers={headers} rows={data} />
+      <Box sx={{ bgcolor: '#f0f0f0', padding: '20px', height: '100vh' }}>
+        <Grid container spacing={4}>
+          <Grid
+            item
+            container
+            spacing={2}
+            alignItems='center'
+            justifyContent='space-evenly'
+          >
+            <Grid item xs={8}>
+              <Table headers={headers} rows={attendanceLogs} />
+            </Grid>
+            <Grid item xs={4}>
+              <CompanyDetails data={companyDetails} />
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <CompanyDetails data={companyDetails} />
+          <Grid
+            item
+            container
+            spacing={2}
+            alignItems='center'
+            justifyContent='space-evenly'
+          >
+            <Grid item xs={4}>
+              <SearchInput
+                data={empIds}
+                label='Search Employee'
+                onKeyDown={handleSearch}
+              />
+            </Grid>
+            <Grid item container spacing={2} xs={4}>
+              <Grid item><AddEmployee/></Grid>
+              <Grid item><RemoveEmployee/></Grid>
+            </Grid>
           </Grid>
+          <Popup
+            employee={employeeDetails}
+            openDialog={openEmpDetails}
+            handleClickOpen={handleClickOpen}
+            handleClose={handleClose}
+          />
         </Grid>
-        <Grid
-          container
-          spacing={2}
-          alignItems='center'
-          justifyContent='space-evenly'
-        >
-          <Grid item xs={4}>
-            <SearchInput
-              data={empIds}
-              label='Search Employee'
-              onKeyDown={handleSearch}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <AddEmployee></AddEmployee>
-            <RemoveEmployee></RemoveEmployee>
-          </Grid>
-        </Grid>
-        <Popup
-          employee={employeeDetails}
-          openDialog={openEmpDetails}
-          handleClickOpen={handleClickOpen}
-          handleClose={handleClose}
-        />
       </Box>
     </div>
   );

@@ -11,7 +11,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
 }
 
 .admin-page-container .top-section .company-details {
@@ -42,26 +41,15 @@
   justify-content: center;
 }
 
-.admin-page-container
-  .middle-section
-  .attendance-logs-container
-  .attendance-logs {
+.admin-page-container .middle-section .attendance-logs-container .attendance-logs {
   border: 2px solid forestgreen;
 }
 
-.admin-page-container
-  .middle-section
-  .attendance-logs-container
-  .attendance-logs
-  th {
+.admin-page-container .middle-section .attendance-logs-container .attendance-logs th {
   border-bottom: 1px solid black;
 }
 
-.admin-page-container
-  .middle-section
-  .attendance-logs-container
-  .attendance-logs
-  td {
+.admin-page-container .middle-section .attendance-logs-container .attendance-logs td {
   text-align: center;
   padding: 5px;
 }

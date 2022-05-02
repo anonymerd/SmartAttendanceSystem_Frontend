@@ -238,7 +238,7 @@ const getCurrDateTime = () => {
 //   },
 // ];
 
-const headers = ['S.no.', 'Type', 'Timestamp', 'Location'];
+const headers = ['S.no.', 'Log Type', 'Timestamp', 'Location'];
 
 const defaultEmployee = {
   name: '',
@@ -283,7 +283,7 @@ const Employee = () => {
      */
     const getAttendanceLogs = () => {
       axios
-        .get(env.SERVER_ADDRESS + '/log' + state.companyId + '/' + state.userId)
+        .get(env.SERVER_ADDRESS + '/log/' + state.companyId + '/' + state.userId)
         .then((res) => {
           console.log(res);
           const data = res.data.data;
