@@ -11,7 +11,6 @@ import './Admin.css';
 import axios from 'axios';
 import env from 'react-dotenv';
 import { useLocation } from 'react-router-dom';
-import { height } from '@mui/system';
 
 // const data = [
 //   {
@@ -91,8 +90,6 @@ const Admin = () => {
   const [employeeDetails, setEmployeeDetails] = useState(defaultEmployee);
   const [companyDetails, setCompanyDetails] = useState(defaultCompany);
   const [attendanceLogs, setAttendanceLogs] = useState([]);
-
-  const getAdminData = () => {};
 
   useEffect(() => {
 

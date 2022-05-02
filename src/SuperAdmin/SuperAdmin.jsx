@@ -1,199 +1,288 @@
 import Table from '../utils/Table/Table';
 import { Button } from '@mui/material';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './SuperAdmin.css';
 import PersonCard from '../utils/PersonCard/PersonCard';
 import Navbar from './Navbar/Navbar';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import env from 'react-dotenv';
 
-const getCurrDateTime = () => {
-  const currentdate = new Date();
-  return (
-    currentdate.getDate() +
-    '/' +
-    (currentdate.getMonth() + 1) +
-    '/' +
-    currentdate.getFullYear() +
-    ' @ ' +
-    currentdate.getHours() +
-    ':' +
-    currentdate.getMinutes() +
-    ':' +
-    currentdate.getSeconds()
-  );
-};
+// const getCurrDateTime = () => {
+//   const currentdate = new Date();
+//   return (
+//     currentdate.getDate() +
+//     '/' +
+//     (currentdate.getMonth() + 1) +
+//     '/' +
+//     currentdate.getFullYear() +
+//     ' @ ' +
+//     currentdate.getHours() +
+//     ':' +
+//     currentdate.getMinutes() +
+//     ':' +
+//     currentdate.getSeconds()
+//   );
+// };
 
-const clientsInfo = {
-  headers: ['Id', 'Organization Name', 'Admin Name', 'No. of Employees'],
-  rows: [
-    {
-      id: 420,
-      name: 'Ambazon',
-      admin: 'Luxmon',
-      noOfEmployees: 69,
-    },
-    {
-      id: 421,
-      name: 'Goomgle',
-      admin: 'MonLux',
-      noOfEmployees: 56,
-    },
-    {
-      id: 422,
-      name: 'Samsoong',
-      admin: 'Kemshav',
-      noOfEmployees: -39,
-    },
-    {
-      id: 423,
-      name: 'KPMG',
-      admin: 'Amkhil',
-      noOfEmployees: 64545646542,
-    },
-  ],
-};
+// const clientsInfo = {
+//   headers: ['Id', 'Organization Name', 'Admin Name', 'No. of Employees'],
+//   rows: [
+//     {
+//       id: 420,
+//       name: 'Ambazon',
+//       admin: 'Luxmon',
+//       noOfEmployees: 69,
+//     },
+//     {
+//       id: 421,
+//       name: 'Goomgle',
+//       admin: 'MonLux',
+//       noOfEmployees: 56,
+//     },
+//     {
+//       id: 422,
+//       name: 'Samsoong',
+//       admin: 'Kemshav',
+//       noOfEmployees: -39,
+//     },
+//     {
+//       id: 423,
+//       name: 'KPMG',
+//       admin: 'Amkhil',
+//       noOfEmployees: 64545646542,
+//     },
+//   ],
+// };
 
-const newReqs = {
-  headers: [
-    'Organization Name',
-    'Email',
-    'No. of Employees',
-    'Date/Time',
-    'Action',
-  ],
-  rows: [
-    {
-      name: 'Philipcart',
-      email: 'info@philipcart.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'MacroHard',
-      email: 'info@macrohard.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'PayCM',
-      email: 'info@paycm.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-    {
-      name: 'Desi Katta',
-      email: 'jaankaari@desikatta.com',
-      noOfEmployees: 88,
-      dateTime: getCurrDateTime(),
-      action: (
-        <div>
-          <Button>Approve</Button> <Button>Deny</Button>
-        </div>
-      ),
-    },
-  ],
-};
+// const newReqs = {
+//   headers: [
+//     'Organization Name',
+//     'Email',
+//     'No. of Employees',
+//     'Date/Time',
+//     'Action',
+//   ],
+//   rows: [
+//     {
+//       name: 'Philipcart',
+//       email: 'info@philipcart.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'MacroHard',
+//       email: 'info@macrohard.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'PayCM',
+//       email: 'info@paycm.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//     {
+//       name: 'Desi Katta',
+//       email: 'jaankaari@desikatta.com',
+//       noOfEmployees: 88,
+//       dateTime: getCurrDateTime(),
+//       action: (
+//         <div>
+//           <Button>Approve</Button> <Button>Deny</Button>
+//         </div>
+//       ),
+//     },
+//   ],
+// };
 
-const employee = {
-  name: 'Micheal Clarke',
-  location: 'Washington DC, US',
-  department: 'R&D',
-  designation: 'Peon',
-  picture: 'https://wallpapercave.com/wp/wp4292787.jpg',
+const newReqsHeaders = ['Organization Name', 'Email','No. of Employees', 'Action',];
+
+const companyDetailsHeaders = ['Id', 'Organization Name', 'Admin Name', 'No. of Employees'];
+
+const defaultSuperAdmin = {
+  name: '',
+  email: '',
+  image:
+    'https://www.google.com/url?sa=i&url=https%3A%2F%2Fenphamedbiotech.com%2Four-team%2F&psig=AOvVaw13HFLxYZx5i_MtjHwGV76L&ust=1651534943276000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPC9m5-9v_cCFQAAAAAdAAAAABAD',
+  designation: '',
+  empId: '',
 };
 
 const SuperAdmin = () => {
+
+  const { state } = useLocation();
+  const [superAdminDetails, setSuperAdminDetails] = useState(defaultSuperAdmin);
+  const [newCompanyRequests, setNewCompanyRequests] = useState([]);
+  const [companiesDetails, setCompaniesDetails] = useState([]);
+
+  useEffect(() => {
+    
+    /**
+     * Get Super Admin details
+     */
+    const getSuperAdminDetails = () => {
+      axios
+      .get(env.SERVER_ADDRESS + '/user/' + state.companyId + '/' + state.userId)
+      .then((res) => {
+        console.log(res);
+        const data = res.data.data;
+        data.image = env.SERVER_ROOT_ADDRESS + data.image;
+        console.log(data.image);
+        setSuperAdminDetails({
+          name: data.name,
+          email: data.email,
+          image: data.image,
+          designation: data.designation,
+          empId: data.userId,
+        });
+      });
+    };
+
+    /**
+     * Get Companies
+     */
+    const getCompanies = () => {
+
+      axios
+        .get(env.SERVER_ADDRESS + '/company')
+        .then((res) => {
+          console.log(res);
+          const data = res.data.data;
+
+          let approvedCompanies = [];
+          let unapprovedCompanies = [];
+
+          data.forEach(entry => {
+
+            if(entry.isApproved) {
+              const approvedCompany = {
+                id: entry.companyId,
+                name: entry.name,
+                admin: entry.adminName,
+                noOfEmployees: entry.noOfEmployees,
+              };
+
+              approvedCompanies.push(approvedCompany);
+            }
+            else {
+              const unapprovedCompany = {
+                name: entry.name,
+                email: entry.email,
+                noOfEmployees: entry.noOfEmployees,
+                action: (
+                  <div>
+                    <Button>Approve</Button> <Button>Deny</Button>
+                  </div>
+                ),
+              };
+
+              unapprovedCompanies.push(unapprovedCompany);
+            }
+          });
+
+          setNewCompanyRequests(unapprovedCompanies);
+          setCompaniesDetails(approvedCompanies);
+        });
+    };
+
+    getSuperAdminDetails();
+    getCompanies();
+  }, []);
+  
+
   return (
     <div className='super-admin-page-container'>
       <div className='navbar-container'>
@@ -201,16 +290,16 @@ const SuperAdmin = () => {
       </div>
       <section className='top-section'>
         <div>
-          <PersonCard data={employee} />
+          <PersonCard data={superAdminDetails} />
         </div>
         <div className='new-request-container'>
-          <Table headers={newReqs.headers} rows={newReqs.rows} />
+          <Table headers={newReqsHeaders} rows={newCompanyRequests} />
         </div>
       </section>
 
       <section className='bottom-section'>
         <div className='client-info-container'>
-          <Table headers={clientsInfo.headers} rows={clientsInfo.rows} />
+          <Table headers={companyDetailsHeaders} rows={companiesDetails} />
         </div>
       </section>
     </div>
