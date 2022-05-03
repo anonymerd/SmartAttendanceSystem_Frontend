@@ -5,14 +5,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
+import env from 'react-dotenv';
 import axios from 'axios';
 
 export default function Registerform() {
-
   const [open, setOpen] = React.useState(false);
   const inputPicRef = React.useRef(null);
+  const registerForm = React.useRef(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,17 +21,18 @@ export default function Registerform() {
     setOpen(false);
   };
 
-  const addCompany = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  const addCompany = () => {
+    // event.preventDefault();
+    console.log('hello');
+    const formData = new FormData(registerForm.current);
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
 
-    const apiAddress = process.env.SERVER_ADDRESS;
+    const apiAddress = env.SERVER_ADDRESS;
 
     axios
-      .post(apiAddress, formData, {
+      .post(apiAddress + '/company', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -53,14 +53,14 @@ export default function Registerform() {
         Register a Company
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <form onSubmit={addCompany}>
+        <form ref={registerForm}>
           <DialogContent>
             <DialogContentText>Register Your Company here!</DialogContentText>
             <TextField
               autoFocus
               margin='dense'
               id='comp-name'
-              name='comp-name'
+              name='name'
               label='Company Name'
               type='text'
               fullWidth
@@ -69,7 +69,7 @@ export default function Registerform() {
             <TextField
               margin='dense'
               id='comp-email'
-              name='comp-email'
+              name='email'
               label='Company Email'
               type='email'
               fullWidth
@@ -102,60 +102,59 @@ export default function Registerform() {
               fullWidth
               variant='standard'
             />
-            <div style={{margin: '2% 0'}}>
+            <div style={{ margin: '2% 0' }}>
               <span>Company Logo: </span>
               <input type='file' name='image' ref={inputPicRef} />
             </div>
-
           </DialogContent>
-         
+
           <DialogContent>
-          <DialogContentText>Add Admin Details Here!</DialogContentText>
+            <DialogContentText>Add Admin Details Here!</DialogContentText>
             <TextField
-                margin='dense'
-                id='admin-name'
-                name='admin-name'
-                label='Admin Name'
-                type='text'
-                fullWidth
-                variant='standard'
-              />
-              <TextField
-                margin='dense'
-                id='admin-email'
-                name='admin-email'
-                label='Admin Email'
-                type='email'
-                fullWidth
-                variant='standard'
-              />
+              margin='dense'
+              id='admin-name'
+              name='admin-name'
+              label='Admin Name'
+              type='text'
+              fullWidth
+              variant='standard'
+            />
+            <TextField
+              margin='dense'
+              id='admin-email'
+              name='admin-email'
+              label='Admin Email'
+              type='email'
+              fullWidth
+              variant='standard'
+            />
 
-              <TextField
-                margin='dense'
-                id='admin-id'
-                name='admin-id'
-                label='Admin Id'
-                type='text'
-                fullWidth
-                variant='standard'
-              />
+            <TextField
+              margin='dense'
+              id='admin-id'
+              name='admin-id'
+              label='Admin Id'
+              type='text'
+              fullWidth
+              variant='standard'
+            />
 
-              <TextField
-                margin='dense'
-                id='admin-designation'
-                name='admin-designation'
-                label='Admin Designation'
-                type='text'
-                fullWidth
-                variant='standard'
-              />
-              <div style={{margin: '2% 0'}}>
-                <span>Admin Image: </span>
-                <input type='file' name='image' ref={inputPicRef} />
-              </div>
+            <TextField
+              margin='dense'
+              id='admin-designation'
+              name='admin-designation'
+              label='Admin Designation'
+              type='text'
+              fullWidth
+              variant='standard'
+            />
+            <div style={{ margin: '2% 0' }}>
+              <span>Admin Image: </span>
+              <input type='file' name='admin-image' ref={inputPicRef} />
+            </div>
           </DialogContent>
           <DialogActions>
-            <Button type='submit'>Register</Button>
+            <Button onClick={addCompany}>Register</Button>
             <Button onClick={handleClose}>Cancel</Button>
           </DialogActions>
         </form>

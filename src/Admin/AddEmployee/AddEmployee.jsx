@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
 
-export default function FormDialog() {
+export default function FormDialog({ companyId }) {
   const [open, setOpen] = React.useState(false);
   const inputPicRef = React.useRef(null);
 
@@ -24,11 +24,14 @@ export default function FormDialog() {
   const addEmployee = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+
+    formData.append('companyId', companyId);
+    formData.append('userType', 'EMP');
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
 
-    const apiAddress = 'http://127.0.0.1:8000/api/employee/';
+    const apiAddress = 'http://127.0.0.1:8000/api/user';
 
     axios
       .post(apiAddress, formData, {
@@ -60,7 +63,7 @@ export default function FormDialog() {
               autoFocus
               margin='dense'
               id='id'
-              name='empId'
+              name='userId'
               label='Id'
               type='text'
               fullWidth
@@ -89,9 +92,19 @@ export default function FormDialog() {
             <TextField
               autoFocus
               margin='dense'
-              id='department'
-              name='department'
-              label='Department'
+              id='password'
+              name='password'
+              label='Password'
+              type='password'
+              fullWidth
+              variant='standard'
+            />
+            <TextField
+              autoFocus
+              margin='dense'
+              id='designation'
+              name='designation'
+              label='Designation'
               type='text'
               fullWidth
               variant='standard'

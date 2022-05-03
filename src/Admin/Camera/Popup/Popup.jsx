@@ -121,8 +121,8 @@ export default function Popup(props) {
               <p className={styles.statValue}>{props.employee.name}</p>
             </Box>
             <Box p={5} flex={'auto'} className={borderedGridStyles.item}>
-              <p className={styles.statLabel}>EmpId</p>
-              <p className={styles.statValue}>{props.employee.empId}</p>
+              <p className={styles.statLabel}>UserId</p>
+              <p className={styles.statValue}>{props.employee.userId}</p>
             </Box>
           </Box>
         </DialogContent>

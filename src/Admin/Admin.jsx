@@ -12,57 +12,6 @@ import axios from 'axios';
 import env from 'react-dotenv';
 import { useLocation } from 'react-router-dom';
 
-// const data = [
-//   {
-//     EmpId: 1,
-//     Name: 'Rohit Bisht',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-//   {
-//     EmpId: 2,
-//     Name: 'Keshav',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-//   {
-//     EmpId: 3,
-//     Name: 'Akhil',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-//   {
-//     EmpId: 4,
-//     Name: 'Jane Doe',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-//   {
-//     EmpId: 1,
-//     Name: 'Rohit Bisht',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-//   {
-//     EmpId: 2,
-//     Name: 'Keshav',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-//   {
-//     EmpId: 3,
-//     Name: 'Akhil',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-//   {
-//     EmpId: 4,
-//     Name: 'Jane Doe',
-//     CheckIn: '20-08-2365',
-//     CheckOut: '36-89-1265',
-//   },
-// ];
-
 const headers = ['EmpId', 'Name', 'Log Type', 'Timestamp', 'Location'];
 
 // const apiAddress = 'http://127.0.0.1:8000/api/employee/';
@@ -83,7 +32,6 @@ const defaultCompany = {
 };
 
 const Admin = () => {
-  
   const { state } = useLocation();
   const [empIds, updateEmpIds] = useState([]);
   const [openEmpDetails, setOpenEmpDetails] = useState(false);
@@ -92,7 +40,6 @@ const Admin = () => {
   const [attendanceLogs, setAttendanceLogs] = useState([]);
 
   useEffect(() => {
-
     /**
      * Get Company Details
      */
@@ -133,29 +80,26 @@ const Admin = () => {
      * Get Attendance Logs for the Company
      */
     const getAttendanceLogs = () => {
-      
-      axios
-        .get(env.SERVER_ADDRESS + '/log/' + state.companyId)
-        .then((res) => {
-          console.log(res);
-          const data = res.data.data;
-          
-          let attendanceLogsArray = [];
+      axios.get(env.SERVER_ADDRESS + '/log/' + state.companyId).then((res) => {
+        console.log(res);
+        const data = res.data.data;
 
-          data.forEach((entry, index) => {
-            const attendanceLog = {
-              empId: entry.userId,
-              Name: entry.userName,
-              type: entry.type,
-              timestamp: entry.timestamp,
-              location: entry.location,
-            };
+        let attendanceLogsArray = [];
 
-            attendanceLogsArray.push(attendanceLog);
-          });
+        data.forEach((entry, index) => {
+          const attendanceLog = {
+            empId: entry.userId,
+            Name: entry.userName,
+            type: entry.type,
+            timestamp: entry.timestamp,
+            location: entry.location,
+          };
 
-          setAttendanceLogs(attendanceLogsArray);
+          attendanceLogsArray.push(attendanceLog);
         });
+
+        setAttendanceLogs(attendanceLogsArray);
+      });
     };
 
     getCompanyData();
@@ -175,11 +119,20 @@ const Admin = () => {
       // Prevent's default 'Enter' behavior.
       event.defaultMuiPrevented = true;
       const empId = event.target.value;
-      axios.get(apiAddress + empId).then((res) => {
-        console.log(res.data);
-        setEmployeeDetails(res.data);
-        setOpenEmpDetails(true);
-      });
+      axios
+        .get(env.SERVER_ADDRESS + '/user/' + state.companyId + '/' + empId)
+        .then((res) => {
+          console.log(res.data);
+          const data = res.data.data;
+          data.image =
+            env.SERVER_ROOT_ADDRESS +
+            '/media/images/user/' +
+            data.userId +
+            '.' +
+            data.image.split('.')[1];
+          setEmployeeDetails(data);
+          setOpenEmpDetails(true);
+        });
       console.log(event.target.value);
     }
   };
@@ -218,8 +171,12 @@ const Admin = () => {
               />
             </Grid>
             <Grid item container spacing={2} xs={4}>
-              <Grid item><AddEmployee/></Grid>
-              <Grid item><RemoveEmployee/></Grid>
+              <Grid item>
+                <AddEmployee companyId={state.companyId} />
+              </Grid>
+              <Grid item>
+                <RemoveEmployee companyId={state.companyId} />
+              </Grid>
             </Grid>
           </Grid>
           <Popup

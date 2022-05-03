@@ -4,6 +4,7 @@ import WebCam from 'react-webcam';
 import axios from 'axios';
 import './Camera.css';
 import Popup from './Popup/Popup';
+import env from 'react-dotenv';
 
 const defaultEmployee = {
   name: 'Rohit Bisht',
@@ -63,7 +64,7 @@ const Camera = () => {
           const interval = setInterval(async () => {
             const detections = await FaceApi.detectAllFaces(
               video,
-              new FaceApi.TinyFaceDetectorOptions({ scoreThreshold: 0.8 })
+              new FaceApi.TinyFaceDetectorOptions({ scoreThreshold: 0.85 })
             );
             const resizedDetections = FaceApi.resizeResults(
               detections,
@@ -75,7 +76,7 @@ const Camera = () => {
             FaceApi.draw.drawDetections(canvas, resizedDetections);
 
             if (detections.length > 0) {
-              // video.pause();
+              video.pause();
               clearInterval(interval);
               takePhoto();
             }
@@ -116,8 +117,32 @@ const Camera = () => {
             })
             .then((res) => {
               console.log(res);
-              setEmployee(res.data);
-              setOpen(true);
+              if (res.data.status) {
+                res.data.data.image =
+                  env.SERVER_ROOT_ADDRESS + res.data.data.image;
+                setEmployee(res.data.data);
+                setOpen(true);
+                addLogs(res.data.data);
+              } else {
+                console.log('Not Found');
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        };
+
+        const addLogs = (emp) => {
+          axios
+            .post(env.SERVER_ADDRESS + '/log', {
+              userId: emp.userId,
+              companyId: emp.companyId,
+              type: 'CI',
+              datetime: new Date().toLocaleString().replace('/', '-'),
+              location: 'KKR',
+            })
+            .then((res) => {
+              console.log(res);
             })
             .catch((err) => {
               console.error(err);

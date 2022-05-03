@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
 
-export default function FormDialog() {
+export default function FormDialog({ companyId }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,14 +20,14 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  const apiAddress = 'http://127.0.0.1:8000/api/employee/';
+  const apiAddress = 'http://127.0.0.1:8000/api/user';
 
   const deleteEmployee = (event) => {
     event.preventDefault();
     const empId = event.currentTarget.elements.empId.value;
 
     axios
-      .delete(apiAddress + empId)
+      .delete(apiAddress + '/' + companyId + '/' + empId)
       .then((res) => {
         console.log(res);
       })

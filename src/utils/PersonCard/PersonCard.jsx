@@ -57,6 +57,7 @@ const useStyles = makeStyles(({ palette }) => ({
 // };
 
 export const CompanyDetails = ({ data }) => {
+  console.log(data);
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
@@ -74,7 +75,7 @@ export const CompanyDetails = ({ data }) => {
       <Box display={'flex'}>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>Emp Id</p>
-          <p className={styles.statValue}>{data.empId}</p>
+          <p className={styles.statValue}>{data.userId}</p>
         </Box>
         <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
           <p className={styles.statLabel}>Designation</p>
