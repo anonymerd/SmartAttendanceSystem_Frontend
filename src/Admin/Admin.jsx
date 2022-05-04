@@ -14,9 +14,6 @@ import { useLocation } from 'react-router-dom';
 
 const headers = ['EmpId', 'Name', 'Log Type', 'Timestamp', 'Location'];
 
-// const apiAddress = 'http://127.0.0.1:8000/api/employee/';
-const apiAddress = env.SERVER_ADDRESS + '/employee';
-// console.log(env.SERVER_ADDRESS)
 const defaultEmployee = {
   name: '',
   empId: '',

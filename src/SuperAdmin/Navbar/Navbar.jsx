@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = ({ title }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
+  const logout = () => {
+    sessionStorage.clear();
+    navigate('/');
+  };
 
   return (
     <div className={classes.root}>
@@ -40,8 +45,9 @@ const NavBar = ({ title }) => {
             variant='contained'
             size='small'
             style={{ margin: '5px' }}
-            >
-              Log Out
+            onClick={logout}
+          >
+            Log Out
           </Button>
         </Toolbar>
       </AppBar>

@@ -8,6 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
+import env from 'react-dotenv';
 
 export default function FormDialog({ companyId }) {
   const [open, setOpen] = React.useState(false);
@@ -31,10 +32,8 @@ export default function FormDialog({ companyId }) {
       console.log(key, value);
     }
 
-    const apiAddress = 'http://127.0.0.1:8000/api/user';
-
     axios
-      .post(apiAddress, formData, {
+      .post(env.SERVER_ADDRESS + '/user', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -48,14 +48,6 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-// const data = {
-//   name: 'Google',
-//   location: 'Banlgalore, India',
-//   logo: 'https://banner2.cleanpng.com/20180728/tju/kisspng-google-logo-business-microsoft-windows-operating-system-5b5cb99e99ca38.3321008115328034866299.jpg',
-//   adminName: 'Adams Ken',
-//   noOfEmployees: '69k',
-// };
-
 export const CompanyDetails = ({ data }) => {
   console.log(data);
   const styles = useStyles();

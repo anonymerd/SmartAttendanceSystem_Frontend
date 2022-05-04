@@ -126,12 +126,6 @@ export default function Popup(props) {
             </Box>
           </Box>
         </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={props.handleClose}>
-            Yes
-          </Button>
-          <Button onClick={props.handleClose}>No</Button>
-        </DialogActions>
       </BootstrapDialog>
     </div>
   );

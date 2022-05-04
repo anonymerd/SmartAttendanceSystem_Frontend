@@ -20,7 +20,7 @@ const Camera = () => {
   const height = 650;
   const width = 800;
   const videoRef = useRef(null);
-  const photoRef = useRef(null);
+  // const photoRef = useRef(null);
   const containerRef = useRef(null);
 
   // Load models on page load
@@ -106,11 +106,8 @@ const Camera = () => {
           formData.append('name', 'random');
           formData.append('image', photo.toDataURL('image/png'));
 
-          const apiAddress = 'http://127.0.0.1:8000/api/image/';
-          // const apiAddress = 'http://127.0.0.1:8000/api/employee/';
-
           axios
-            .post(apiAddress, formData, {
+            .post(env.SERVER_ADDRESS + '/image', formData, {
               headers: {
                 'Content-Type': 'multipart/form-data',
               },
@@ -133,14 +130,36 @@ const Camera = () => {
         };
 
         const addLogs = (emp) => {
+          function padTo2Digits(num) {
+            return num.toString().padStart(2, '0');
+          }
+
+          function formatDate(date) {
+            return (
+              [
+                date.getFullYear(),
+                padTo2Digits(date.getMonth() + 1),
+                padTo2Digits(date.getDate()),
+              ].join('-') +
+              ' ' +
+              [
+                padTo2Digits(date.getHours()),
+                padTo2Digits(date.getMinutes()),
+                padTo2Digits(date.getSeconds()),
+              ].join(':')
+            );
+          }
+          const logData = {
+            userId: emp.userId,
+            companyId: emp.companyId,
+            type: 'CI',
+            datetime: formatDate(new Date()),
+            location: 'KKR',
+          };
+
+          console.log(logData);
           axios
-            .post(env.SERVER_ADDRESS + '/log', {
-              userId: emp.userId,
-              companyId: emp.companyId,
-              type: 'CI',
-              datetime: new Date().toLocaleString().replace('/', '-'),
-              location: 'KKR',
-            })
+            .post(env.SERVER_ADDRESS + '/log', logData)
             .then((res) => {
               console.log(res);
             })
@@ -184,15 +203,14 @@ const Camera = () => {
           playsInline
           muted
         />
-        <canvas ref={photoRef}></canvas>
-        <Popup
-          employee={employee}
-          openDialog={open}
-          handleClickOpen={handleClickOpen}
-          handleClose={handleClose}
-        />
-        {/* <button onClick={takePhoto}>Capture</button> */}
+        {/* <canvas ref={photoRef}></canvas> */}
       </div>
+      <Popup
+        employee={employee}
+        openDialog={open}
+        handleClickOpen={handleClickOpen}
+        handleClose={handleClose}
+      />
     </div>
   );
 };
