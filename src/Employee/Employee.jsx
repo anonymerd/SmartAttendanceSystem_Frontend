@@ -42,7 +42,7 @@ const Employee = () => {
             email: data.email,
             image: data.image,
             designation: data.designation,
-            empId: data.userId,
+            userId: data.userId,
           });
         });
     };
@@ -65,7 +65,7 @@ const Employee = () => {
             const attendanceLog = {
               sno: index + 1,
               type: entry.type,
-              timestamp: entry.timestamp,
+              timestamp: entry.datetime,
               location: entry.location,
             };
 

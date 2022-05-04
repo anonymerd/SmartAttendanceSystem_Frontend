@@ -56,7 +56,7 @@ const SuperAdmin = () => {
             email: data.email,
             image: data.image,
             designation: data.designation,
-            empId: data.userId,
+            userId: data.userId,
           });
         });
     };

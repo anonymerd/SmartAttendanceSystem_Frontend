@@ -12,7 +12,7 @@ import axios from 'axios';
 import env from 'react-dotenv';
 import { useLocation } from 'react-router-dom';
 
-const headers = ['EmpId', 'Name', 'Log Type', 'Timestamp', 'Location'];
+const headers = ['EmpId', 'Log Type', 'Timestamp', 'Location'];
 
 const defaultEmployee = {
   name: '',
@@ -86,9 +86,8 @@ const Admin = () => {
         data.forEach((entry, index) => {
           const attendanceLog = {
             empId: entry.userId,
-            Name: entry.userName,
             type: entry.type,
-            timestamp: entry.timestamp,
+            timestamp: entry.datetime,
             location: entry.location,
           };
 
